@@ -11,6 +11,7 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
+        unique: true,
         allowNull:false
       },
       password: {
@@ -19,6 +20,7 @@ module.exports = {
       },
       role: {
         type: Sequelize.STRING,
+        defaultValue: "Staff",
         allowNull:false
       },
       phoneNumber: {

@@ -2,8 +2,8 @@ npx sequelize-cli model:generate --name User --attributes email:string,password:
 npx sequelize-cli model:generate --name Type --attributes name:string
 npx sequelize-cli model:generate --name Lodging --attributes name:string,facility:text,roomCapacity:integer,imgUrl:string,location:string,price:integer,typeId:integer,authorId:integer
 
-20240226100801-create-lodging
-20240226100825-create-type
+20240226104713-seeding-lodging
+20240226104742-seeding-user
 
-20240226100825-create-lodging
-20240226100801-create-type
+20240226104742-seeding-lodging
+20240226104713-seeding-user
