@@ -5,6 +5,10 @@ const ControllerUser = require("../controllers/user-controller");
 const ControllerAuth = require("../controllers/auth-controller");
 const route = express.Router();
 
+
+// add user
+route.post("/add-user", ControllerAuth.addUser)
+
 // admin session
 route.post("/lodgings", ControllerAdmin.createLodging)
 
@@ -13,8 +17,6 @@ route.get("/lodgings/pub", ControllerUser.getLodging)
 
 route.get("/lodgings", ControllerAdmin.getLodging) 
 
-// add user
-route.post("/add-user", ControllerAuth.addUser)
 
 route.get("/lodgings/:id", ControllerAdmin.getLodgingByID)
 route.put("/lodgings/:id", ControllerAdmin.updateLodging)

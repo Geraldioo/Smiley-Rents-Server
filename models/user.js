@@ -65,7 +65,6 @@ module.exports = (sequelize, DataTypes) => {
     phoneNumber: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "Staff",
       validate: {
         notNull: {
           msg: "phoneNumber can't be null"
@@ -78,7 +77,6 @@ module.exports = (sequelize, DataTypes) => {
     address: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "Staff",
       validate: {
         notNull: {
           msg: "address can't be null"
