@@ -12,42 +12,42 @@ Target:
 
 ### **REST API**
 
-- [ ] Membuat entitas utama (Create / POST)
-  - [ ] Endpoint ini akan menerima request body berdasar field-field di entitas utama sesuai [tema aplikasi](https://docs.google.com/document/d/1GZwh8OJGZZQVUuWE0Cr13iMA2lLNE9mMoHfrbmETEBs/edit#heading=h.mcqrsbt2auhv).
-  - [ ] Jika request  berhasil, kembalikan response dengan 201 status code dan response body berupa object yang berisikan data baru yang berhasil di-input.
-  - [ ] Jika request gagal karena validasi tidak terpenuhi, kembalikan response dengan 400 status code dan response body berupa object yang berisikan validation errors.
-  - [ ] Jika request gagal karena kesalahan server, kembalikan response dengan 500 status code.
+- [ X ] Membuat entitas utama (Create / POST)
+  - [ X ] Endpoint ini akan menerima request body berdasar field-field di entitas utama sesuai [tema aplikasi](https://docs.google.com/document/d/1GZwh8OJGZZQVUuWE0Cr13iMA2lLNE9mMoHfrbmETEBs/edit#heading=h.mcqrsbt2auhv).
+  - [ X ] Jika request  berhasil, kembalikan response dengan 201 status code dan response body berupa object yang berisikan data baru yang berhasil di-input.
+  - [ X ] Jika request gagal karena validasi tidak terpenuhi, kembalikan response dengan 400 status code dan response body berupa object yang berisikan validation errors.
+  - [ X ] Jika request gagal karena kesalahan server, kembalikan response dengan 500 status code.
 
-- [ ] Mengambil semua data entitas utama (Read / GET)
-  - [ ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa array of objects yang berisikan semua data entitas utama include User sebagai pemilik data (tanpa menampilkan passwordnya).
-  - [ ] Jika request gagal, kembalikan response dengan 500 status code.
+- [ X ] Mengambil semua data entitas utama (Read / GET)
+  - [ X ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa array of objects yang berisikan semua data entitas utama include User sebagai pemilik data (tanpa menampilkan passwordnya).
+  - [ X ] Jika request gagal, kembalikan response dengan 500 status code.
 
-- [ ]  Mengambil detail entitas utama berdasar id (Read / GET)
-  - [ ] Id dikirimkan via request params
-  - [ ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa object yang berisikan data todo.
-  - [ ] Jika request gagal karena todo tidak ditemukan, kembalikan response dengan 404 status code dan response body berupa object yang berisikan error not found.
+- [ X ]  Mengambil detail entitas utama berdasar id (Read / GET)
+  - [ X ] Id dikirimkan via request params
+  - [ X ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa object yang berisikan data todo.
+  - [ X ] Jika request gagal karena todo tidak ditemukan, kembalikan response dengan 404 status code dan response body berupa object yang berisikan error not found.
 
-- [ ] Mengupdate entitas utama (Update/ PUT)
-  - [ ] Endpoint ini akan menerima request body berdasar field-field di entitas utama.
-  - [ ] Id dikirimkan via request params
-  - [ ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa object yang berisikan data yang diupdate.
-  - [ ] Jika request gagal karena data tidak ditemukan, kembalikan response dengan 404 status code dan response body berupa object yang berisikan error not found.
-  - [ ] Jika request gagal karena validasi tidak terpenuhi, kembalikan response dengan 400 status code dan response body berupa object yang berisikan validation errors.
-  - [ ] Jika request gagal karena kesalahan server, kembalikan response dengan 500 status code.
+- [ X ] Mengupdate entitas utama (Update/ PUT)
+  - [ X ] Endpoint ini akan menerima request body berdasar field-field di entitas utama.
+  - [ X ] Id dikirimkan via request params
+  - [ X ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa object yang berisikan data yang diupdate.
+  - [ X ] Jika request gagal karena data tidak ditemukan, kembalikan response dengan 404 status code dan response body berupa object yang berisikan error not found.
+  - [ X ] Jika request gagal karena validasi tidak terpenuhi, kembalikan response dengan 400 status code dan response body berupa object yang berisikan validation errors.
+  - [ X ] Jika request gagal karena kesalahan server, kembalikan response dengan 500 status code.
 
-- [ ] Menghapus entitas utama (Delete / DELETE)
-  - [ ] Id dikirimkan via request params
-  - [ ] Jika request berhasil, kembalikan response dengan 200 status code dan response berupa object yang berisikan data yang berhasil di-delete atau bisa juga mengembalikan data message saja message: '[entity name] success to delete'
-  - [ ] Jika request gagal karena todo tidak ditemukan, kembalikan response dengan 404 status code dan response body berupa object yang berisikan error not found
-  - [ ] Jika request gagal karena kesalahan server, kembalikan response dengan 500 status code.
+- [ X ] Menghapus entitas utama (Delete / DELETE)
+  - [ X ] Id dikirimkan via request params
+  - [ X ] Jika request berhasil, kembalikan response dengan 200 status code dan response berupa object yang berisikan data yang berhasil di-delete atau bisa juga mengembalikan data message saja message: '[entity name] success to delete'
+  - [ X ] Jika request gagal karena todo tidak ditemukan, kembalikan response dengan 404 status code dan response body berupa object yang berisikan error not found
+  - [ X ] Jika request gagal karena kesalahan server, kembalikan response dengan 500 status code.
 
-- [ ] Membuat entitas kedua genres/categories/types (Create / POST)
-  - [ ] Endpoint ini akan menerima request body berdasar field-field di entitas kedua sesuai [tema aplikasi](https://docs.google.com/document/d/1GZwh8OJGZZQVUuWE0Cr13iMA2lLNE9mMoHfrbmETEBs/edit#heading=h.mcqrsbt2auhv).
-  - [ ] Jika request  berhasil, kembalikan response dengan 201 status code dan response body berupa object yang berisikan data baru yang berhasil di-input.
-  - [ ] Jika request gagal karena validasi tidak terpenuhi, kembalikan response dengan 400 status code dan response body berupa object yang berisikan validation errors.
-  - [ ] Jika request gagal karena kesalahan server, kembalikan response dengan 500 status code.
+- [ X ] Membuat entitas kedua genres/categories/types (Create / POST)
+  - [ X ] Endpoint ini akan menerima request body berdasar field-field di entitas kedua sesuai [tema aplikasi](https://docs.google.com/document/d/1GZwh8OJGZZQVUuWE0Cr13iMA2lLNE9mMoHfrbmETEBs/edit#heading=h.mcqrsbt2auhv).
+  - [ X ] Jika request  berhasil, kembalikan response dengan 201 status code dan response body berupa object yang berisikan data baru yang berhasil di-input.
+  - [ X ] Jika request gagal karena validasi tidak terpenuhi, kembalikan response dengan 400 status code dan response body berupa object yang berisikan validation errors.
+  - [ X ] Jika request gagal karena kesalahan server, kembalikan response dengan 500 status code.
 
-- [ ] Mengambil semua data genres/categories/types (Read / GET)
+- [ X ] Mengambil semua data genres/categories/types (Read / GET)
   - [ ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa array of objects yang berisikan semua data genres/categories/types.
   - [ ] Jika request gagal, kembalikan response dengan 500 status code.
 

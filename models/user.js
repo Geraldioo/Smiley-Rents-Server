@@ -13,12 +13,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.belongsTo(models.Lodging)
+      User.hasMany(models.Lodging, {
+        foreignKey: "authorId"
+      })
     }
   }
   User.init({
     email: {
       type: DataTypes.STRING,
+      allowNull: false,
       unique: {
         msg: "email already exist"
       },
@@ -36,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notNull: {
           msg: "password can't be null"
@@ -47,6 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     role: {
       type: DataTypes.STRING,
+      allowNull: false,
       defaultValue: "Staff",
       validate: {
         notNull: {
@@ -59,6 +64,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     phoneNumber: {
       type: DataTypes.STRING,
+      allowNull: false,
       defaultValue: "Staff",
       validate: {
         notNull: {
@@ -71,6 +77,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     address: {
       type: DataTypes.STRING,
+      allowNull: false,
       defaultValue: "Staff",
       validate: {
         notNull: {

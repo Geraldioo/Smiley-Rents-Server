@@ -11,13 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Lodging.hasMany(models.Type)
-      Lodging.hasMany(models.User)
+      Lodging.belongsTo(models.Type, {
+        foreignKey: "typeId"
+      })
+      Lodging.belongsTo(models.User, {
+        foreignKey: "authorId"
+      })
     }
   }
   Lodging.init({
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notNull: {
           msg: "name can't be null"
@@ -29,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     facility: {
       type: DataTypes.TEXT,
+      allowNull: false,
       validate: {
         notNull: {
           msg: "facility can't be null"
@@ -40,6 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     roomCapacity: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       validate: {
         notNull: {
           msg: "roomCapacity can't be null"
@@ -51,6 +58,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     imgUrl: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notNull: {
           msg: "imgUrl can't be null"
@@ -65,6 +73,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     location: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notNull: {
           msg: "location can't be null"
@@ -76,6 +85,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     price: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       validate: {
         notNull: {
           msg: "price can't be null"
@@ -91,6 +101,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     typeId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       validate: {
         notNull: {
           msg: "typeId can't be null"
@@ -102,6 +113,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     authorId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       validate: {
         notNull: {
           msg: "authorId can't be null"

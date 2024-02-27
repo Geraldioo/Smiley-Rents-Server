@@ -11,18 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Type.belongsTo(models.Lodging)
+      Type.hasMany(models.Lodging, {
+        foreignKey: "typeId"
+      })
     }
   }
   Type.init({
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notNull: {
-          msg: "type can't be null"
+          msg: "type name can't be null"
         },
         notEmpty: {
-          msg: "type can't be empty"
+          msg: "type name can't be empty"
         }
       }
     }
