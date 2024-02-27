@@ -1,5 +1,7 @@
 'use strict';
 
+const hasPass = require('../helper/bcrypt');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -15,7 +17,7 @@ module.exports = {
    await queryInterface.bulkInsert("Users", [
     {
       email: "user1@gmail.com",
-      password: 'user1',
+      password: hasPass("user1"),
       role: "Admin",
       phoneNumber: '081210043016',
       address: "Jl. Andara",

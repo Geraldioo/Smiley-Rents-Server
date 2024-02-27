@@ -48,33 +48,33 @@ Target:
   - [ X ] Jika request gagal karena kesalahan server, kembalikan response dengan 500 status code.
 
 - [ X ] Mengambil semua data genres/categories/types (Read / GET)
-  - [ ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa array of objects yang berisikan semua data genres/categories/types.
-  - [ ] Jika request gagal, kembalikan response dengan 500 status code.
+  - [ X ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa array of objects yang berisikan semua data genres/categories/types.
+  - [ X ] Jika request gagal, kembalikan response dengan 500 status code.
 
-- [ ] Mengupdate kedua genres/categories/types (Update/ PUT)
-  - [ ] Endpoint ini akan menerima request body berdasar field-field di entitas kedua genres/categories/types.
-  - [ ] Id dikirimkan via request params
-  - [ ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa object yang berisikan data yang diupdate.
-  - [ ] Jika request gagal karena data tidak ditemukan, kembalikan response dengan 404 status code dan response body berupa object yang berisikan error not found.
-  - [ ] Jika request gagal karena validasi tidak terpenuhi, kembalikan response dengan 400 status code dan response body berupa object yang berisikan validation errors.
-  - [ ] Jika request gagal karena kesalahan server, kembalikan response dengan 500 status code.
+- [ X ] Mengupdate kedua genres/categories/types (Update/ PUT)
+  - [ X ] Endpoint ini akan menerima request body berdasar field-field di entitas kedua genres/categories/types.
+  - [ X ] Id dikirimkan via request params
+  - [ X ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa object yang berisikan data yang diupdate.
+  - [ X ] Jika request gagal karena data tidak ditemukan, kembalikan response dengan 404 status code dan response body berupa object yang berisikan error not found.
+  - [ X ] Jika request gagal karena validasi tidak terpenuhi, kembalikan response dengan 400 status code dan response body berupa object yang berisikan validation errors.
+  - [ X ] Jika request gagal karena kesalahan server, kembalikan response dengan 500 status code.
 
-- [ ] Menghapus entitas kedua genres/categories/types (Delete / DELETE)
-  - [ ] Id dikirimkan via request params
-  - [ ] Jika request berhasil, kembalikan response dengan 200 status code dan response berupa object yang berisikan data yang berhasil di-delete atau bisa juga mengembalikan data message saja message: '[entity name] success to delete'
-  - [ ] Jika request gagal karena todo tidak ditemukan, kembalikan response dengan 404 status code dan response body berupa object yang berisikan error not found
-  - [ ] Jika request gagal karena kesalahan server, kembalikan response dengan 500 status code.
+- [ X ] Menghapus entitas kedua genres/categories/types (Delete / DELETE)
+  - [ X ] Id dikirimkan via request params
+  - [ X ] Jika request berhasil, kembalikan response dengan 200 status code dan response berupa object yang berisikan data yang berhasil di-delete atau bisa juga mengembalikan data message saja message: '[entity name] success to delete'
+  - [ X ] Jika request gagal karena todo tidak ditemukan, kembalikan response dengan 404 status code dan response body berupa object yang berisikan error not found
+  - [ X ] Jika request gagal karena kesalahan server, kembalikan response dengan 500 status code.
 
-- [ ] Mengambil semua data entitas utama (Read / GET) untuk public site
-  - [ ] Tambahkan prefix /pub pada endpoint ini
-  - [ ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa array of objects yang berisikan semua data entitas utama.
-  - [ ] Jika request gagal, kembalikan response dengan 500 status code.
+- [ X ] Mengambil semua data entitas utama (Read / GET) untuk public site
+  - [ X ] Tambahkan prefix /pub pada endpoint ini
+  - [ X ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa array of objects yang berisikan semua data entitas utama.
+  - [ X ] Jika request gagal, kembalikan response dengan 500 status code.
 
-- [ ] Mengambil detail entitas utama berdasar id (Read / GET) untuk public site
-  - [ ] Tambahkan prefix /pub pada endpoint kalian
-  - [ ] Id dikirimkan via request params
-  - [ ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa object yang berisikan data.
-  - [ ] Jika request gagal karena data tidak ditemukan, kembalikan response dengan 404 status code dan response body berupa object yang berisikan error not found.
+- [ X ] Mengambil detail entitas utama berdasar id (Read / GET) untuk public site
+  - [ X ] Tambahkan prefix /pub pada endpoint kalian
+  - [ X ] Id dikirimkan via request params
+  - [ X ] Jika request berhasil, kembalikan response dengan 200 status code dan response body berupa object yang berisikan data.
+  - [ X ] Jika request gagal karena data tidak ditemukan, kembalikan response dengan 404 status code dan response body berupa object yang berisikan error not found.
 
 ### **API Documentation**
 

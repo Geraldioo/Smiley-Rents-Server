@@ -1,14 +1,31 @@
 const express = require("express");
-const Controller = require("../controllers/controller");
+const { errHandler } = require("../middleware/errHandler");
+const ControllerAdmin = require("../controllers/admin-controller");
+const ControllerUser = require("../controllers/user-controller");
 const route = express.Router();
 
-route.post("/lodgings", Controller.createLodging)
-route.get("/lodgings", Controller.getLodging)
-route.get("/lodgings/:id", Controller.getLodgingByID)
-route.put("/lodgings/:id", Controller.updateLodging)
-route.delete("/lodgings/:id", Controller.deleteLodging)
+// admin session
+route.post("/lodgings", ControllerAdmin.createLodging)
 
-route.post("/types", Controller.createType)
-route.get("/types", Controller.getType)
+// user session
+route.get("/lodgings/pub", ControllerUser.getLodging)
+
+route.get("/lodgings", ControllerAdmin.getLodging) 
+
+
+route.get("/lodgings/:id", ControllerAdmin.getLodgingByID)
+route.put("/lodgings/:id", ControllerAdmin.updateLodging)
+route.delete("/lodgings/:id", ControllerAdmin.deleteLodging)
+// user session
+route.get("/lodgings/pub/:id", ControllerUser.getLoadingByID)
+
+route.post("/types", ControllerAdmin.createType)
+route.get("/types", ControllerAdmin.getType)
+route.put("/types/:id", ControllerAdmin.updateType)
+route.delete("/types/:id", ControllerAdmin.deleteType)
+
+// user session
+
+route.use(errHandler)
 
 module.exports = route

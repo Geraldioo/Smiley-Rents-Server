@@ -1,7 +1,7 @@
 const { Lodging, User, Type } = require("../models");
 
 class Controller {
-  static async createLodging(req, res) {
+  static async createLodging(req, res, next) {
     try {
       console.log(req.body, "<<<<");
       const {
@@ -14,7 +14,7 @@ class Controller {
         typeId,
         authorId,
       } = req.body;
-      
+
       const lodging = await Lodging.create({
         name,
         facility,
@@ -27,34 +27,28 @@ class Controller {
       });
       res.status(201).json(lodging);
     } catch (error) {
-      if (error.name === "SequelizeValidationError") {
-        res.status(400).json({
-          message: error.errors[0].message,
-        });
-      } else {
-        console.log(error);
-        res.status(500).json({ message: "Internal Server Error" });
-      }
+      console.log(error);
+      next(error);
     }
   }
 
-  static async getLodging(req, res) {
+  static async getLodging(req, res, next) {
     try {
       const lodging = await Lodging.findAll({
         include: {
           model: User,
-          attributes: { exclude: ["password"] },
+          attributes: ["email", "role", "phoneNumber", "address"],
         },
       });
       // console.log(lodging, "<<<< ini odging");
       res.status(200).json(lodging);
     } catch (error) {
       console.log(error.message);
-      res.status(500).json({ message: "Internal Server Error" });
+      next(error);
     }
   }
 
-  static async getLodgingByID(req, res) {
+  static async getLodgingByID(req, res, next) {
     try {
       const { id } = req.params;
       const lodging = await Lodging.findOne({
@@ -66,19 +60,19 @@ class Controller {
           id: id,
         },
       });
-      console.log(lodging, "!!!!");
+      // console.log(lodging, "!!!!");
       if (!lodging) {
-        res.status(400).json({ message: "error not found" });
+        throw { name: "NotFound" };
       } else {
         res.status(200).json(lodging);
       }
     } catch (error) {
       console.log(error.message);
-      res.status(500).json({ message: "Internal Server Error" });
+      next(error);
     }
   }
 
-  static async updateLodging(req, res) {
+  static async updateLodging(req, res, next) {
     try {
       const { id } = req.params;
 
@@ -110,24 +104,16 @@ class Controller {
         authorId,
       });
 
-      res.status(200).json({ message: "Lodging Updated", lodging});
+      res
+        .status(200)
+        .json({ message: `Lodging with id: ${id} has been updated`, lodging });
     } catch (error) {
-      if (error.name === "SequelizeValidationError") {
-        res.status(400).json({
-          message: error.errors[0].message,
-        });
-      } else if (error.name === "NotFound") {
-        res.status(404).json({
-          message: "error not found",
-        });
-      } else {
-        console.log(error);
-        res.status(500).json({ message: "Internal Server Error" });
-      }
+      console.log(error);
+      next(error);
     }
   }
 
-  static async deleteLodging(req, res) {
+  static async deleteLodging(req, res, next) {
     try {
       const { id } = req.params;
       const findLodging = await Lodging.findByPk(id);
@@ -140,46 +126,78 @@ class Controller {
         },
       });
 
-      res.status(200).json({ message: `Lodging with id: ${id} success to delete` });
-    } catch (error) {
-      if (error.name === "NotFound") {
-        res.status(404).json({
-          message: "error not found",
-        });
-      } else {
-        res.status(500).json({ message: "Internal Server Error" });
-      }
-    }
-  }
-
-  static async createType (req, res){
-    try {
-      const { name } = req.body
-
-      const type = await Type.create({
-        name
-      })
-      res.status(201).json(type)
-    } catch (error) {
-      if (error.name === "SequelizeValidationError") {
-        res.status(400).json({
-          message: error.errors[0].message,
-        });
-      } else {
-        console.log(error);
-        res.status(500).json({ message: "Internal Server Error" });
-      }
-    }
-  }
-
-  static async getType (req, res){
-    try {
-      console.log(Type, "!<!<!<!<");
-      const type = await Type.findAll()
-      res.status(200).json(type)
+      res
+        .status(200)
+        .json({ message: `Lodging with id: ${id} success to delete` });
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: "Internal Server Error" });
+      next(error)
+    }
+  }
+
+  static async createType(req, res, next) {
+    try {
+      const { name } = req.body;
+
+      const type = await Type.create({
+        name,
+      });
+      res.status(201).json(type);
+    } catch (error) {
+      console.log(error);
+      next(error)
+    }
+  }
+
+  static async getType(req, res, next) {
+    try {
+      // console.log(Type, "!<!<!<!<");
+      const type = await Type.findAll();
+      res.status(200).json(type);
+    } catch (error) {
+      console.log(error);
+      next(error)
+    }
+  }
+
+  static async updateType(req, res, next) {
+    try {
+      const { id } = req.params;
+      const findType = await Type.findByPk(id);
+
+      if (!findType) throw { name: "NotFound", id };
+      const { name } = req.body;
+      const type = await findType.update({
+        name,
+      });
+      res
+        .status(200)
+        .json({ message: `Type with id: ${id} has been updated`, type });
+    } catch (error) {
+     console.log(error);
+     next(error)
+    }
+  }
+
+  static async deleteType(req, res, next) {
+    try {
+      const { id } = req.params;
+      const findType = await Type.findByPk(id);
+      if (!findType) {
+        throw { name: "NotFound", id };
+      }
+      await Type.destroy({
+        where: {
+          id: id,
+        },
+      });
+
+      res
+        .status(200)
+        .json({ message: `Type with id: ${id} success to delete` });
+    } catch (error) {
+     console.log(error);
+     next(error)
     }
   }
 }
