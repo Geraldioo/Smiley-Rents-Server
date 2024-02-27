@@ -54,7 +54,7 @@ class Controller {
       const lodging = await Lodging.findOne({
         include: {
           model: User,
-          attributes: { exclude: ["password"] },
+          attributes: ["email", "role", "phoneNumber", "address"],
         },
         where: {
           id: id,
