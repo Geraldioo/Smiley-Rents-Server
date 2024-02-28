@@ -1,5 +1,13 @@
 const { Lodging, User, Type } = require("../models");
 
+const cloudinary = require("cloudinary").v2       
+cloudinary.config({ 
+  cloud_name: 'dqzvi1mpt', 
+  api_key: '737864581877772', 
+  api_secret: process.env.API_SECRET,
+  secure : true
+});
+
 class Controller {
   static async createLodging(req, res, next) {
     try {
@@ -200,6 +208,29 @@ class Controller {
      next(error)
     }
   }
+
+  static async updateImg(req, res, next){
+    try {
+      // console.log(req.file, ">>><<<<");
+      const {id} = req.params
+      const lodging = await Lodging.findByPk(id)
+      if (!lodging) throw { name: "NotFound"};
+      if (!req.file) throw { name: "SequelizeValidationError"}
+      
+      // console.log(req.file, "<><><<>");
+      const base64 = req.file.buffer.toString("base64")
+      const url = `data:${req.file.mimetype};base64,${base64}`
+      const result = await cloudinary.uploader.upload(url)
+      await lodging.update({
+        imgUrl: result.secure_url
+      })
+      res.status(200).json({message: `image ${lodging.name} success to update`})
+    } catch (error) {
+      console.log(error);
+      next(error)
+    }
+  }
+  
 }
 
 module.exports = Controller;

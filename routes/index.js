@@ -5,6 +5,7 @@ const ControllerPublic = require("../controllers/public-controller");
 const ControllerAuth = require("../controllers/auth-controller");
 const { authentication } = require("../middleware/authentication");
 const { authorizationAdmin, authorizationStaff } = require("../middleware/authorization");
+const Uploader = require("../middleware/uploader");
 const route = express.Router();
 
 
@@ -32,6 +33,8 @@ route.get("/types", ControllerUser.getType)
 route.put("/types/:id", authorizationStaff, ControllerUser.updateType)
 route.delete("/types/:id", authorizationStaff, ControllerUser.deleteType)
 
+// multer
+route.patch("/lodgings/:id", authorizationStaff, Uploader.single("image"), ControllerUser.updateImg)
 
 route.use(errHandler)
 
