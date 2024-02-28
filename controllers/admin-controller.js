@@ -72,7 +72,7 @@ class Controller {
     }
   }
 
-  static async updateLodging(req, res, next) {
+  static async updateLodging (req, res, next) {
     try {
       const { id } = req.params;
 

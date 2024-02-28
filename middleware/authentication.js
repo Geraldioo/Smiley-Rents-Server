@@ -9,6 +9,7 @@ const authentication = async (req, res, next) => {
         if (!authentication) throw {name: "InvalidToken"}
         // console.log(authorization, "<<<><>>><><><><");
 
+        // console.log(req.headers, "<><><><>");
         // kita cek type tokennya bearer atau bukan
         const [type, token] = authorization.split(" ")
         if (type !== "Bearer") throw {name: "InvalidToken"}

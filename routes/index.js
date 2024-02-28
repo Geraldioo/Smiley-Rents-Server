@@ -1,35 +1,36 @@
 const express = require("express");
 const { errHandler } = require("../middleware/errHandler");
-const ControllerAdmin = require("../controllers/admin-controller");
-const ControllerUser = require("../controllers/user-controller");
+const ControllerUser = require("../controllers/admin-controller");
+const ControllerPublic = require("../controllers/public-controller");
 const ControllerAuth = require("../controllers/auth-controller");
 const { authentication } = require("../middleware/authentication");
+const { authorizationAdmin, authorizationStaff } = require("../middleware/authorization");
 const route = express.Router();
 
 
+// public session
+route.get("/pub/lodgings/:id", ControllerPublic.getLoadingByID)
+route.get("/pub/lodgings", ControllerPublic.getLodging)
 // add user
 route.post("/add-user", ControllerAuth.addUser)
 route.post("/login", ControllerAuth.login)
 
+// middleware
 route.use(authentication)
 
-
-// admin session
-route.post("/lodgings", ControllerAdmin.createLodging)
-route.get("/lodgings", ControllerAdmin.getLodging) 
-
-route.get("/lodgings/:id", ControllerAdmin.getLodgingByID)
-route.put("/lodgings/:id", ControllerAdmin.updateLodging)
-route.delete("/lodgings/:id", ControllerAdmin.deleteLodging)
-
-route.post("/types", ControllerAdmin.createType)
-route.get("/types", ControllerAdmin.getType)
-route.put("/types/:id", ControllerAdmin.updateType)
-route.delete("/types/:id", ControllerAdmin.deleteType)
-
 // user session
-route.get("/lodgings/pub/:id", ControllerUser.getLoadingByID)
-route.get("/lodgings/pub", ControllerUser.getLodging)
+route.post("/lodgings", ControllerUser.createLodging)
+route.get("/lodgings", ControllerUser.getLodging) 
+
+route.get("/lodgings/:id", ControllerUser.getLodgingByID)
+route.put("/lodgings/:id", ControllerUser.updateLodging)
+route.delete("/lodgings/:id", ControllerUser.deleteLodging)
+
+route.post("/types", ControllerUser.createType)
+route.get("/types", ControllerUser.getType)
+route.put("/types/:id", ControllerUser.updateType)
+route.delete("/types/:id", ControllerUser.deleteType)
+
 
 route.use(errHandler)
 
