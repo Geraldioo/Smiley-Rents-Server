@@ -12,24 +12,25 @@ const route = express.Router();
 route.get("/pub/lodgings/:id", ControllerPublic.getLoadingByID)
 route.get("/pub/lodgings", ControllerPublic.getLodging)
 // add user
-route.post("/add-user", ControllerAuth.addUser)
+route.post("/add-user", authorizationAdmin, ControllerAuth.addUser)
 route.post("/login", ControllerAuth.login)
 
 // middleware
 route.use(authentication)
 
-// user session
+// route.use(authorizationAdmin)
+
+// Admin session
 route.post("/lodgings", ControllerUser.createLodging)
 route.get("/lodgings", ControllerUser.getLodging) 
-
 route.get("/lodgings/:id", ControllerUser.getLodgingByID)
-route.put("/lodgings/:id", ControllerUser.updateLodging)
-route.delete("/lodgings/:id", ControllerUser.deleteLodging)
+route.put("/lodgings/:id", authorizationStaff, ControllerUser.updateLodging)
+route.delete("/lodgings/:id", authorizationStaff, ControllerUser.deleteLodging)
 
 route.post("/types", ControllerUser.createType)
 route.get("/types", ControllerUser.getType)
-route.put("/types/:id", ControllerUser.updateType)
-route.delete("/types/:id", ControllerUser.deleteType)
+route.put("/types/:id", authorizationStaff, ControllerUser.updateType)
+route.delete("/types/:id", authorizationStaff, ControllerUser.deleteType)
 
 
 route.use(errHandler)
