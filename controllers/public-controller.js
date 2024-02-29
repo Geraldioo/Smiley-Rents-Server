@@ -12,7 +12,7 @@ class Controller {
       if (search) {
         option.where = {
           name: {
-            [Op.like]: `%${search}%` 
+            [Op.iLike]: `%${search}%` 
           }
         };
       }
@@ -20,7 +20,7 @@ class Controller {
       if (filterBy){
         option.where = {
           typeId: {
-            [Op.eq]: filterBy
+            [Op.or]: filterBy
           }
         }
       }

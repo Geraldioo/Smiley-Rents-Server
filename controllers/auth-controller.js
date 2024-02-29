@@ -24,6 +24,7 @@ class ControllerAuth {
 
 
       // CEK KE DB KITA EMAIL NYA
+      console.log('masukk user');
       const user = await User.findOne({where: {email: email}});
       if (!user) throw { name: "InvalidLogin" }
 

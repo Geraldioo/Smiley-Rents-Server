@@ -13,20 +13,21 @@ const authentication = async (req, res, next) => {
         // kita cek type tokennya bearer atau bukan
         const [type, token] = authorization.split(" ")
         if (type !== "Bearer") throw {name: "InvalidToken"}
-
+        
         // kita cek tokennya asli atau tidak
         const {id} = verifyToken(token)
-
+        
         // kita cek ke db, apakah isi token itu sesuai dengan db kita?
         const user = await User.findByPk(id)
         if (!user) throw {name: "InvalidToken"}
-
+        
+        console.log('masuk');
         req.user = user
         // - lanjutakan ke endpoint
         next()
         // selesai
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         next(error)
     }
 }

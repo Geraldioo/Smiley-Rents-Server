@@ -17,8 +17,10 @@ const errHandler = (err, req, res, next) => {
             res.status(404).json({message: "error not found"});
             break;
         case "InvalidToken":
-        case "JsonWebTokenError":
             res.status(401).json({message: "Invalid Token"});
+            break;
+        case "JsonWebTokenError":
+            res.status(401).json({message: "Error Token"});
             break;
         case "Forbidden":
             res.status(403).json({message: "Forbidden"});
