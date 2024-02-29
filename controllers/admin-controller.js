@@ -2,8 +2,8 @@ const { Lodging, User, Type } = require("../models");
 
 const cloudinary = require("cloudinary").v2       
 cloudinary.config({ 
-  cloud_name: 'dqzvi1mpt', 
-  api_key: '737864581877772', 
+  cloud_name: process.env.CLOUD_NAME, 
+  api_key: process.env.API_KEY, 
   api_secret: process.env.API_SECRET,
   secure : true
 });
@@ -12,6 +12,7 @@ class Controller {
   static async createLodging(req, res, next) {
     try {
       console.log(req.body, "<<<<");
+      let authorID = req.user.id
       const {
         name,
         facility,
@@ -19,10 +20,9 @@ class Controller {
         imgUrl,
         location,
         price,
-        typeId,
-        authorId,
+        typeId
       } = req.body;
-
+// console.log(authorID, "******");
       const lodging = await Lodging.create({
         name,
         facility,
@@ -31,7 +31,7 @@ class Controller {
         location,
         price,
         typeId,
-        authorId,
+        authorId : authorID,
       });
       res.status(201).json(lodging);
     } catch (error) {
