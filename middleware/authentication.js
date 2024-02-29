@@ -6,7 +6,7 @@ const authentication = async (req, res, next) => {
 
         // kita cek user bawa token atau tidak
         const {authorization} = req.headers
-        if (!authentication) throw {name: "InvalidToken"}
+        if (!authorization) throw {name: "InvalidToken"}
         // console.log(authorization, "<<<><>>><><><><");
 
         // console.log(req.headers, "<><><><>");

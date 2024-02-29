@@ -3,6 +3,7 @@ const { Lodging } = require("../models");
 const authorizationAdmin = async (req, res, next) => {
   try {
     // mau nge cek apkah user yang lagi login admin atau bukan
+    // console.log(req.user, "<><><><>");
     if (req.user.role !== "Admin") throw { name: "Forbidden" };
 
     // kalo dia admin bakal di next
@@ -21,7 +22,7 @@ const authorizationStaff = async (req, res, next) => {
     }else {
       const { id } = req.params;
       let data = await Lodging.findByPk(id)
-      console.log(data, ">>>>>");
+      // console.log(data, ">>>>>");
       if (!data) throw {name: "NotFound"}
       if (req.user.id === data.authorId) {
         next();
