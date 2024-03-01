@@ -12,7 +12,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert("Lodgings", [
+   let data = [
     {
       name: "Oyo",
       facility: "Swimming Pool, Gym, Restaurant, Cafe, Rooftop, Playground",
@@ -25,8 +25,12 @@ module.exports = {
       typeId : 1,
       authorId : 1
     }
-   ])
-  },
+   ]
+
+   for (let i = 1; i <= 20; i++){
+     await queryInterface.bulkInsert("Lodgings", data)
+    }
+   },
 
   async down (queryInterface, Sequelize) {
     /**

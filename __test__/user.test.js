@@ -2,14 +2,14 @@ const request = require("supertest");
 const app = require("../app");
 const { User } = require("../models");
 const { signToken } = require("../helper/jwt");
+const { hasPass } = require("../helper/bcrypt");
 
-let token;
 beforeAll(async () => {
   try {
     let user = await User.bulkCreate([
         {
             email: "test@mail.com",
-            password: "testing",
+            password: hasPass("testing"),
             role: "Admin",
             phoneNumber: "test123456",
             address: "Jl.Testing"
@@ -23,19 +23,24 @@ beforeAll(async () => {
     console.log(error);
   }
 });
+let token;
 
 describe("POST /login", () => {
-  // test.only("login success", async () => {
-  //   const dummyData = {
-  //     email: "test@mail.com",
-  //     password: "testing",
-  //   };
-  //   console.log(dummyData, "dummy data >>>>>>>>>>");
-  //   const response = await request(app).post("/login").send(dummyData);
+  test("login success", async () => {
+    const dummyData = {
+      email: "test@mail.com",
+      password: "testing",
+    };
+    // console.log(dummyData, "dummy data >>>>>>>>>>");
+    const response = await request(app).post("/login").send(dummyData);
 
-  //   console.log(response.body, '<<<< ini body');
-  //   expect(response.status).toBe(200);  
-  // });
+    // console.log(response.body, '<<<< ini body');
+    expect(response.status).toBe(200);
+    expect(response.body).toBeInstanceOf(Object);
+    expect(response.body).toHaveProperty("message", expect.any(String))
+    expect(response.body).toHaveProperty("token", expect.any(String))
+  });
+
   test("throw error validation login (email)", async () => {
     const dummyData = {
       email: null && "",
@@ -55,7 +60,7 @@ describe("POST /login", () => {
     };
 
     const response = await request(app).post("/login").send(dummyData);
-    console.log(response.body, "<<<< ini respon body");
+    // console.log(response.body, "<<<< ini respon body");
     expect(response.status).toBe(400);
     expect(response.body).toBeInstanceOf(Object)
     expect(response.body).toHaveProperty("message", "Password is required")
@@ -100,7 +105,7 @@ describe("POST /add-user", () => {
       .set("Authorization", `Bearer ${token}`)
       .send(dummyData);
 
-      console.log(response.body, '<<<< ini body');
+      // console.log(response.body, '<<<< ini body');
     expect(response.status).toBe(201);
     expect(response.body).toBeInstanceOf(Object);
     expect(response.body.user).toHaveProperty("email");
@@ -161,7 +166,7 @@ describe("POST /add-user", () => {
     expect(response.body).toBeInstanceOf(Object)
     expect(response.body).toHaveProperty("message", "password can't be empty")
   });
-  // test.only("throw error unique constraint add-user (email)", async () => {
+  // test("throw error unique constraint add-user (email)", async () => {
   //   const dummyData = {
   //     email: "test@mail.com",
   //     password: "testing",
@@ -170,10 +175,10 @@ describe("POST /add-user", () => {
   //   };
 
   //   const response = await request(app).post("/add-user").set("Authorization", `Bearer ${token}`).send(dummyData);
-  //   console.log(response.body, "<<<< ini respon body");
+  //   // console.log(response.body, "<<<< ini respon body");
   //   expect(response.status).toBe(400);
   //   expect(response.body).toBeInstanceOf(Object)
-  //   // expect(response.body).toHaveProperty("message", "email can't be empty")
+  //   expect(response.body).toHaveProperty("message", "Email already registered")
   // });
   test("throw error validation email format add-user (email)", async () => {
     const dummyData = {
@@ -198,7 +203,7 @@ describe("POST /add-user", () => {
     };
 
     const response = await request(app).post("/add-user").send(dummyData);
-    console.log(response.body, "<<<< ini respon body");
+    // console.log(response.body, "<<<< ini respon body");
     expect(response.status).toBe(401);
     expect(response.body).toBeInstanceOf(Object)
     expect(response.body).toHaveProperty("message", "Invalid Token")
@@ -212,7 +217,7 @@ describe("POST /add-user", () => {
     };
 
     const response = await request(app).post("/add-user").set("Authorization", `Bearer ${'ADAFfbafasub*@H7)9gs7abshvkzhayin'}`).send(dummyData);
-    console.log(response.body, "<<<< ini respon body");
+    // console.log(response.body, "<<<< ini respon body");
     expect(response.status).toBe(401);
     expect(response.body).toBeInstanceOf(Object)
     expect(response.body).toHaveProperty("message", 'Error Token')

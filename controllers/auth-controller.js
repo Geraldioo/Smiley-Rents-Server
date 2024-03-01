@@ -24,13 +24,14 @@ class ControllerAuth {
 
 
       // CEK KE DB KITA EMAIL NYA
-      console.log('masukk user');
       const user = await User.findOne({where: {email: email}});
       if (!user) throw { name: "InvalidLogin" }
-
+      
       // CEK PASSWORD BENAR ATAU TIDAK
+      // console.log(user.password, ">>>>>>> INI CEK PASS");
       const checkPass = comparePassword(password, user.password)
       if (!checkPass) throw { name: "InvalidLogin" }
+      // console.log('masukk user <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
 
       // BIKININ SI TOKEN
       const payload = { id: user.id }
