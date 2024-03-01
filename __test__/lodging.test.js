@@ -3,6 +3,10 @@ const app = require("../app");
 const { User, Type, Lodging } = require("../models");
 const { signToken } = require("../helper/jwt");
 const { hasPass } = require("../helper/bcrypt");
+const path = require('path')
+const fs = require('fs')
+const filePath = path.resolve(__dirname, "./test.jpg");
+const imageBuffer = fs.readFileSync(filePath);
 
 
 let tokenAdmin;
@@ -57,7 +61,7 @@ beforeAll(async () => {
         }
        ])
   } catch (error) {
-    // console.log(error);
+    console.log(error);
   }
 });
 
@@ -392,6 +396,7 @@ describe("PUT /lodgings/:id", () => {
     })
 })
 
+
 describe("DELETE /lodgings/:id", () => {
     test("success delete lodgings by id", async () => {
 
@@ -407,7 +412,7 @@ describe("DELETE /lodgings/:id", () => {
     })
 
     test("haven't login yet", async () => {
-        let id = 1
+        let id = 2
         const response = await request(app)
         .delete(`/lodgings/${id}`)
 
@@ -418,7 +423,7 @@ describe("DELETE /lodgings/:id", () => {
     }) 
 
     test("invalid token", async () => {
-        let id = 1
+        let id = 2
         const response = await request(app)
         .delete(`/lodgings/${id}`)
         .set("Authorization", `Bearer ${undefined}`)
@@ -428,7 +433,7 @@ describe("DELETE /lodgings/:id", () => {
         expect(response.body).toHaveProperty("message", 'Invalid Token');
     }) 
 
-    test.only("failed delete lodgings by id", async () => {
+    test("failed delete lodgings by id", async () => {
         let id = 6
         const response = await request(app)
         .delete(`/lodgings/${id}`)
@@ -441,16 +446,93 @@ describe("DELETE /lodgings/:id", () => {
     })
 
     test("failed delete lodgings unauthorized", async () => {
-
-        let id = 1
+        let id = 2
         const response = await request(app)
         .delete(`/lodgings/${id}`)
         .set("Authorization", `Bearer ${tokenStaff}`)
+
+        console.log(response.body, "<<< ini respon body");
+        expect(response.status).toBe(403)
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Forbidden")
+    })
+})
+
+describe("PATCH /lodgings/:id", () => {
+    test("success update imgUrl by id", async () => {
+        let id = 2
+        const response = await request(app)
+        .patch(`/lodgings/${id}`)
+        .set("Authorization", `Bearer ${tokenAdmin}`)
+        .attach("image", imageBuffer, "test.jpg")
+
+        // console.log(response.body, "<<<< ini respon body patch");
+        expect(response.status).toBe(200)
+        expect(response.body).toBeInstanceOf(Object)
+        expect(response.body).toHaveProperty("message", expect.stringContaining('image'))
+    })
+
+    test("haven't login yet", async () => {
+        let id = 2
+        const response = await request(app)
+        .patch(`/lodgings/${id}`)
+        .attach("image", imageBuffer, "test.jpg")
+
+        // console.log(response.body, "<<< ini respon body");
+        expect(response.status).toBe(401);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", 'Invalid Token');
+    }) 
+
+    test("invalid token", async () => {
+        let id = 2
+        const response = await request(app)
+        .patch(`/lodgings/${id}`)
+        .set("Authorization", `Bearer ${undefined}`)
+        .attach("image", imageBuffer, "test.jpg")
+        // console.log(response.body, "<<< ini respon body");
+        expect(response.status).toBe(401);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", 'Invalid Token');
+    })
+    
+    test("failed update image", async () => {
+        let id = 10
+        const response = await request(app)
+        .patch(`/lodgings/${id}`)
+        .set("Authorization", `Bearer ${tokenAdmin}`)
+        .attach("image", imageBuffer, "test.jpg")
+
+        // console.log(response.body, "<<< ini respon body");
+        expect(response.status).toBe(404)
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", 'error not found')
+    })
+    
+    test("failed update image unauthorized", async () => {
+        let id = 2
+        const response = await request(app)
+        .patch(`/lodgings/${id}`)
+        .set("Authorization", `Bearer ${tokenStaff}`)
+        .attach("image", imageBuffer, "test.jpg")
 
         // console.log(response.body, "<<< ini respon body");
         expect(response.status).toBe(403)
         expect(response.body).toBeInstanceOf(Object);
         expect(response.body).toHaveProperty("message", "Forbidden")
+    })
+
+    test("failed update image empty req.body", async () => {
+        // let id = 1
+        let id = 2
+        const response = await request(app)
+        .patch(`/lodgings/${id}`)
+        .set("Authorization", `Bearer ${tokenAdmin}`)
+
+        console.log(response.body, "<<< ini respon body INI ERROR");
+        expect(response.status).toBe(400)
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message")
     })
 })
 

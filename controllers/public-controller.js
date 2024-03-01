@@ -20,7 +20,7 @@ class Controller {
       if (filterBy){
         option.where = {
           typeId: {
-            [Op.or]: filterBy
+            [Op.eq]: filterBy
           }
         }
       }
@@ -48,9 +48,7 @@ class Controller {
         }
       }
       
-      const {count, rows}= await Lodging.findAndCountAll(option, {
-        include: Type
-      });
+      const {count, rows}= await Lodging.findAndCountAll(option);
       res.status(200).json({
         page: pageNumber, 
         data: rows,
@@ -59,7 +57,7 @@ class Controller {
         dataPerPage: limit
       })
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
       next(error)
     }
   }

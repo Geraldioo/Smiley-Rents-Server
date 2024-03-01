@@ -215,7 +215,7 @@ class Controller {
       const {id} = req.params
       const lodging = await Lodging.findByPk(id)
       if (!lodging) throw { name: "NotFound"};
-      if (!req.file) throw { name: "SequelizeValidationError"}
+      if (!req.file) throw { name: "MulterError"}
       
       // console.log(req.file, "<><><<>");
       const base64 = req.file.buffer.toString("base64")

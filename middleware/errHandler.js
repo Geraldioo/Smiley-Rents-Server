@@ -3,6 +3,9 @@ const errHandler = (err, req, res, next) => {
     case "SequelizeValidationError":
         res.status(400).json({ message: err.errors[0].message });
         break;
+    case "MulterError":
+        res.status(400).json({ message: "imgUrl/imgFile can't empty"});
+        break;
     case "SequelizeUniqueConstraintError":
         res.status(400).json({ message: "email already exist"});
         break

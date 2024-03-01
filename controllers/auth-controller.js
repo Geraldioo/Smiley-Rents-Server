@@ -28,10 +28,10 @@ class ControllerAuth {
       if (!user) throw { name: "InvalidLogin" }
       
       // CEK PASSWORD BENAR ATAU TIDAK
-      // console.log(user.password, ">>>>>>> INI CEK PASS");
+      console.log(user, ">>>>>>> INI CEK PASS");
       const checkPass = comparePassword(password, user.password)
       if (!checkPass) throw { name: "InvalidLogin" }
-      // console.log('masukk user <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
+      // console.log(user,'masukk user <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
 
       // BIKININ SI TOKEN
       const payload = { id: user.id }

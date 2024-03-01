@@ -33,8 +33,7 @@ describe("POST /login", () => {
     };
     // console.log(dummyData, "dummy data >>>>>>>>>>");
     const response = await request(app).post("/login").send(dummyData);
-
-    // console.log(response.body, '<<<< ini body');
+    // console.log(response.user, '<<<< ini body');
     expect(response.status).toBe(200);
     expect(response.body).toBeInstanceOf(Object);
     expect(response.body).toHaveProperty("message", expect.any(String));
