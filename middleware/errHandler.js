@@ -1,9 +1,11 @@
 const errHandler = (err, req, res, next) => {
   switch (err.name) {
     case "SequelizeValidationError":
+        res.status(400).json({ message: err.errors[0].message });
+        break;
     case "SequelizeUniqueConstraintError":
-      res.status(400).json({ message: err.errors[0].message });
-      break;
+        res.status(400).json({ message: "email already exist"});
+        break
     case "EmailRequired":
       res.status(400).json({ message: "Email is required" });
       break;
