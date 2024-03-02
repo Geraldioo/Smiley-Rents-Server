@@ -451,7 +451,7 @@ describe("DELETE /lodgings/:id", () => {
         .delete(`/lodgings/${id}`)
         .set("Authorization", `Bearer ${tokenStaff}`)
 
-        console.log(response.body, "<<< ini respon body");
+        // console.log(response.body, "<<< ini respon body");
         expect(response.status).toBe(403)
         expect(response.body).toBeInstanceOf(Object);
         expect(response.body).toHaveProperty("message", "Forbidden")

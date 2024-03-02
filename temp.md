@@ -177,9 +177,7 @@ _Response (200 - OK)_
 # USER (Admin / Staff) SESSION
 
 ## 1. POST /add-user
-
 ### Description: register or add new user (Only Admin Have Access)
-
 Request:
 
 - headers:
@@ -264,9 +262,7 @@ OR
 &nbsp;
 
 ## 2. POST /login
-
-### Description: login as Admin / Staff
-
+### Description: login as Admin /  Staff
 Request:
 
 - body:
@@ -311,7 +307,6 @@ _Response (401 - Unauthorized)_
 &nbsp;
 
 ## 3. POST /lodgings
-
 ### Description: create new lodgings
 
 Request:
@@ -516,23 +511,23 @@ _Response (200 - OK)_
 
 ```json
 {
-  "id": 1,
-  "name": "RedDorz",
-  "facility": "Swimming Pool, Gym, Restaurant, Cafe, Rooftop, Playground",
-  "roomCapacity": 2,
-  "imgUrl": "https://tse1.mm.bing.net/th?id=OIP.CRrzC41ZBDmjBCr3IWsvjwHaE8&pid=Api&P=0&h=180",
-  "location": "Pondok Labu",
-  "price": 250000,
-  "typeId": 1,
-  "authorId": 1,
-  "createdAt": "2024-03-02T09:39:44.545Z",
-  "updatedAt": "2024-03-02T09:39:44.545Z",
-  "User": {
-    "email": "user1@gmail.com",
-    "role": "Admin",
-    "phoneNumber": "081210043016",
-    "address": "Jl. Andara"
-  }
+    "id": 1,
+    "name": "RedDorz",
+    "facility": "Swimming Pool, Gym, Restaurant, Cafe, Rooftop, Playground",
+    "roomCapacity": 2,
+    "imgUrl": "https://tse1.mm.bing.net/th?id=OIP.CRrzC41ZBDmjBCr3IWsvjwHaE8&pid=Api&P=0&h=180",
+    "location": "Pondok Labu",
+    "price": 250000,
+    "typeId": 1,
+    "authorId": 1,
+    "createdAt": "2024-03-02T09:39:44.545Z",
+    "updatedAt": "2024-03-02T09:39:44.545Z",
+    "User": {
+        "email": "user1@gmail.com",
+        "role": "Admin",
+        "phoneNumber": "081210043016",
+        "address": "Jl. Andara"
+    }
 }
 ```
 
@@ -544,7 +539,9 @@ _Response (404 - Not Found)_
 }
 ```
 
+
 &nbsp;
+
 
 ## 6. PUT /lodgings/:id
 
@@ -613,8 +610,8 @@ _Response (400 - Bad Request)_
   "message": "name can't be empty"
 }
 ```
-
 &nbsp;
+
 
 ## 7. DELETE /lodgings/:id
 
@@ -917,13 +914,17 @@ _Response (404 - Not Found)_
 
 &nbsp;
 
-# Global Error
+## Global Error
 
 _Response (401 - Unauthorized)_
 
 ```json
 {
   "message": "Invalid Token"
+}
+OR
+{
+  "message": "Invalid Email/Password"
 }
 ```
 
