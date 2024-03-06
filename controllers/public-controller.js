@@ -46,7 +46,7 @@ class Controller {
         }
       } else {
         option.limit = limit;
-        option.offset = limit * (pageNum - 1);
+        option.offset = limit * (pageNumber - 1);
       }
 
       const { count, rows } = await Lodging.findAndCountAll(option);
