@@ -66,7 +66,9 @@ class Controller {
   static async getLoadingByID(req, res, next) {
     try {
       const { id } = req.params;
-      const lodging = await Lodging.findByPk(id);
+      const lodging = await Lodging.findByPk(id, {
+        include: Type
+      });
       // console.log(lodging, "!!!!");
       if (!lodging) {
         throw { name: "NotFound" };
