@@ -47,6 +47,9 @@ class Controller {
           model: User,
           attributes: ["email", "role", "phoneNumber", "address"],
         },
+        order:[
+          ["id", "ASC"]
+        ]
       });
       // console.log(lodging, "<<<< ini odging");
       res.status(200).json(lodging);
