@@ -36,8 +36,8 @@ class ControllerAuth {
       // BIKININ SI TOKEN
       const payload = { id: user.id }
       const token = signToken(payload)
-
-      res.status(200).json({message: "success login", token})
+      // console.log(user, "<<<<<<< USER");
+      res.status(200).json({message: "success login", token, user})
     } catch (error) {
       console.log(error);
       next(error);
