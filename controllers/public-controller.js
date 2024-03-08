@@ -43,6 +43,7 @@ class Controller {
         if (page.number) {
           pageNumber = +page.number;
           option.offset = limit * (pageNumber - 1);
+          option.limit = limit
         }
       } else {
         option.limit = limit;
